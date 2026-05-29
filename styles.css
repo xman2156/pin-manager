@@ -1,0 +1,314 @@
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #0f0f10;
+    color: white;
+}
+
+/* HEADER */
+
+header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 12px;
+    background: #151517;
+    border-bottom: 1px solid #222;
+}
+
+h1 {
+    font-size: 16px;
+    margin: 0;
+}
+
+button {
+    background: #4aa3ff;
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2f8fe6;
+}
+
+/* APP */
+
+#app {
+    padding: 10px;
+}
+
+/* BOARD */
+
+.board {
+    margin-bottom: 14px;
+    border: 1px solid #222;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.board-header {
+    padding: 10px;
+    background: #17181b;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* COLLAPSIBLE CONTENT */
+
+.board-content {
+    display: none;
+    padding: 10px;
+}
+
+/* SECTIONS CONTAINER – two columns */
+
+.sections-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    align-items: start;
+    margin-bottom: 15px;
+}
+
+/* "Add Section" button – spans full width */
+
+.add-section-btn {
+    grid-column: 1 / -1;
+    justify-self: start;
+    background: #2a2a2e;
+    color: #4aa3ff;
+    border: 1px dashed #4aa3ff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.add-section-btn:hover {
+    background: #333;
+}
+
+/* SECTION */
+
+.section {
+    border: 1px solid #2a2a2e;
+    border-radius: 8px;
+    padding: 8px;
+    transition: background 0.2s;
+}
+
+.section.drag-over {
+    background: rgba(74, 163, 255, 0.1);
+    border-color: #4aa3ff;
+}
+
+/* Collapsed section hides its grid */
+.section.collapsed .grid {
+    display: none;
+}
+
+/* SECTION HEADER – draggable for reordering */
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    cursor: grab;
+}
+
+.section-header:active {
+    cursor: grabbing;
+}
+
+/* Collapse toggle arrow */
+.section-toggle {
+    cursor: pointer;
+    font-size: 14px;
+    width: 18px;
+    text-align: center;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.section-toggle:hover {
+    color: #4aa3ff;
+}
+
+.section-name {
+    font-weight: 600;
+    font-size: 14px;
+    flex: 1;
+}
+
+.section-name.editing {
+    background: #2a2a2e;
+    outline: 1px solid #4aa3ff;
+    border-radius: 4px;
+    padding: 2px 6px;
+    min-width: 80px;
+    cursor: text;
+}
+
+.section-count {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.rename-section-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.rename-section-btn:hover {
+    background: #333;
+    color: white;
+}
+
+/* GRID – default 4 columns */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+/* Inside custom sections – 2 columns */
+
+.section .grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* Uncategorized area – distinct look */
+
+.uncategorized-area {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px dashed #444;
+    border-radius: 8px;
+    background: #121214;
+    transition: background 0.2s;
+}
+
+.uncategorized-area.drag-over {
+    background: rgba(74, 163, 255, 0.1);
+    border-color: #4aa3ff;
+}
+
+.uncategorized-label {
+    font-weight: 600;
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 8px;
+}
+
+/* Responsive overrides for main grid (used by uncategorized) */
+@media (max-width: 1200px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 800px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 500px) {
+    .grid { grid-template-columns: 1fr; }
+}
+
+/* Override for section grids to stay 2 columns until narrower */
+@media (max-width: 700px) {
+    .section .grid {
+        grid-template-columns: 1fr;
+    }
+    .sections-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* CARD */
+
+.card {
+    background: #1a1b1e;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 10px;
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:active {
+    cursor: grabbing;
+}
+
+/* Card image container */
+.card-image {
+    margin: -10px -10px 8px -10px;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px 12px 0 0;
+    pointer-events: none;
+}
+
+.title {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.date {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-bottom: 6px;
+}
+
+a {
+    color: #4aa3ff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* CONTEXT MENU */
+
+.context-menu {
+    position: fixed;
+    z-index: 9999;
+    background: #1e1f23;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 4px 0;
+    min-width: 130px;
+    display: none;               /* hidden by default */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.context-menu-item {
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #eee;
+    white-space: nowrap;
+}
+
+.context-menu-item:hover {
+    background: #333;
+}
